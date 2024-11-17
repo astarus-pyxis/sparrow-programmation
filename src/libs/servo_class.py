@@ -3,7 +3,7 @@ from machine import Pin,PWM
 class SERVO():
 
     MID = 1500000
-    MIN = 0600000
+    MIN = 600000
     MAX = 2200000
     
     def __init__(self, pin):

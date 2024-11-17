@@ -2,7 +2,7 @@
 
 Vous trouverez dans ce répertoire le polycopié du cours, les slides projetées en cours ainsi que des ressources pour écrire votre code.
 
-Dans le répertoire code, vous trouverez :
+Dans le dossier src, vous trouverez :
 
 - Un dossier tests avec des scripts pour tester le buzzer, le servo et l'accélérocontact.
 - Un dossier libs avec les librairies à téléverser sur la carte pour exécuter votre code.
@@ -13,7 +13,7 @@ Dans le répertoire code, vous trouverez :
 
 In this directory, you will find the course handout, the slides presented in class, as well as resources for writing your code.
 
-In the code directory, you will find:
+In the src folder, you will find:
 
 - A folder named tests with scripts to test the buzzer, servo, and accelerometer switch.
 - A folder named libs with the libraries to upload to the board to run your code.

@@ -1,7 +1,7 @@
 """
 
-Sparrow - Programmation
-Test de la led
+Sparrow - Embedded systems programming
+Test of the internal led
 Florian Topeza
 
 """

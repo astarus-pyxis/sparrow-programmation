@@ -1,7 +1,7 @@
 """
 
-Sparrow - Programmation
-Test de l'accéléromètre
+Sparrow - Embedded systems programming
+Test of the accelerometer
 Florian Topeza
 
 """
