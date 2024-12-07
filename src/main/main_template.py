@@ -8,21 +8,20 @@ Florian Topeza
 # This template gives you the outline of the code for your rocket.
 # Feel free to use it to write your code.
 
-# import files
-import machine
+# import the necessary libraries
 from machine import Pin, I2C
 import math
 import time
 import sys
 
-# use the files lps22hb.py and lsm6dsx.py if you use the new IMU and barometer
-# otherwise use the files MPU9250.py and lps22hbtr.py
+# upload the files lps22hb.py and lsm6dsx.py if you use the new IMU and barometer (black board)
+# otherwise upload the files imu.py and lps22hbtr.py (blue board)
 
-# comment the two following lines if you use the new IMU and barometer
+# comment the two following lines if you use the new IMU and barometer (black board)
 from MPU9250 import MPU9250
 from lps22hbtr import LPS22HB
 
-# uncomment the two following lines if you use the new IMU and barometer
+# uncomment the two following lines if you use the new IMU and barometer (black board)
 #from lsm6dsx import LSM6DSx
 #from lps22hb import LPS22HB
 
@@ -42,14 +41,20 @@ BUZZER_ENABLE = True
 if __name__ == '__main__':
     
     # creating objects for the IMU and barometer
-    # comment the following line if you use the new IMU
-    mpu9250 = MPU9250()
-    # uncomment the following line if you use the new IMU
-    #mpu9250 = L6M6DSx()
-    lps22hb=LPS22HB()
+    # comment the following lines if you use the new sensors
+    imu = MPU9250()
+    lps22hb = LPS22HB()
+
+    # uncomment the following lines if you use the new IMU
+    # /!\ contrary to the old sensors, the constructors of the new sensors take the I2C bus as
+    # argument
+    #i2c_bus = I2C(1,scl=Pin(7),sda=Pin(6),freq=400_000)
+    #imu = LSM6DSx(i2c_bus)
+    #lps22hb=LPS22HB(i2c_bus)
     
     # creating object for the actuator
-    servo = SERVO(10)
+    # Check on your board which pin is connected to the servo
+    servo = SERVO(18) # for example, if the servo is connected to pin 18
     
     # variables for the main loop
     launched = 0
@@ -66,7 +71,6 @@ if __name__ == '__main__':
     PS = 0
     PRESS_DATA = 0.0
     TEMP_DATA = 0.0
-    u8Buf=[0,0,0]
     
     # lock the parachute compartment
     # TO DO
@@ -85,14 +89,14 @@ if __name__ == '__main__':
     # main loop
     while landed == 0:
         
-        # comment the two following lines if you use the new IMU and barometer
+        # comment the two following lines if you use the new IMU and barometer (black board)
         PRESS_DATA, TEMP_DATA = lps22hb.getData()
-        ax, ay, az, pitch, roll, yaw = mpu9250.getData()
+        ax, ay, az, pitch, roll, yaw = imu.getData()
 
-        # uncomment the tree following lines if you use the new IMU and barometer
+        # uncomment the tree following lines if you use the new IMU and barometer (black board)
         #PRESS_DATA = lps22hb.pressure()
         #TEMP_DATA = lps22hb.temperature()
-        #ax, ay, az, pitch, roll, yaw = mpu9250.data()
+        #ax, ay, az, pitch, roll, yaw = imu.data()
             
         if PS == 0 :
             PS = PRESS_DATA
@@ -114,7 +118,7 @@ if __name__ == '__main__':
         print('\r\nLancé = %.1f , Parachute = %.1f\r\n'%(launched, parachute))
         
         """Engine"""
-        # if the rocket dectects a strong acceleration (more than 40m.s^(-2) in any direction), it considers it is being launched and the timer starts
+        # if the rocket detects a strong acceleration (more than 40m.s^(-2) in any direction), it considers it is being launched and the timer starts
         # TO DO
         # if (launched == ...) and (abs(ax) > 40 or ...):
         #    launched = ...
@@ -124,7 +128,7 @@ if __name__ == '__main__':
             # TO DO
             # buzz every second at 1500Hz
             
-        if launched :
+        if launched == 1:
             
             # TO DO
             # Time of flight calculation
@@ -169,6 +173,7 @@ if __name__ == '__main__':
                     break
 
             # write the data in the file
+            # do not forget to flush the file
             # TO DO   
             #file.write(str(execution_time) + "," + str(PRESS_DATA) + "," + ... + "\n")
     

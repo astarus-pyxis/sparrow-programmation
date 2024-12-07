@@ -7,7 +7,7 @@ import time
 from machine import Pin,PWM,Timer
 
 # Declaration d'un PWM pour le buzzer
-buzzer = PWM(Pin(18))
+buzzer = PWM(Pin(0))
 
 # Declaration timer pour le buzzer et son extinction
 timerBuzzer = Timer()
