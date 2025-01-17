@@ -11,8 +11,8 @@ import time
 
 from servo_class import *
 
-servo = SERVO(10)
+servo = SERVO(8)
 
-servo.move_servo(servo.MIN) # change the position to MIN, MID or MAX to move the actuator
+servo.move_servo(servo.MAX) # change the position to MIN, MID or MAX to move the actuator
 time.sleep(0.27)
 servo.deinit()
